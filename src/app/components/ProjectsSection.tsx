@@ -32,7 +32,7 @@ export default function ProjectsSection() {
             <SiTypescript title="TypeScript" />
           </div>
           <a
-            href="https://your-demo-link.com"
+            href="https://mauykary-wedding.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block mt-2 px-4 py-2 bg-cyan-600 text-white rounded hover:bg-cyan-500 transition"
