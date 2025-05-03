@@ -20,11 +20,7 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
 
 export default function Home() {
   const { t } = useTranslation();
-  const [lang, setLang] = useState("es");
-
-  useEffect(() => {
-    setLang(i18n.language);
-  }, []);
+  const [lang, setLang] = useState(i18n.language);
 
   const toggleLanguage = () => {
     const newLang = i18n.language === "es" ? "en" : "es";
@@ -35,9 +31,11 @@ export default function Home() {
   return (
     <div className="relative min-h-screen text-white font-sans">
       <div className="fixed inset-0 z-[-1] pointer-events-none">
-        <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 1] }}>
-          <ScrollStars />
-        </Canvas>
+        <ClientOnly>
+          <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 1] }}>
+            <ScrollStars />
+          </Canvas>
+        </ClientOnly>
       </div>
 
       <main className="relative z-10">

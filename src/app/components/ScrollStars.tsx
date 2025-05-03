@@ -29,7 +29,7 @@ const ScrollStars = React.memo(function ScrollStars() {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [invalidate]);
 
   useFrame(() => {
     if (group.current) {
