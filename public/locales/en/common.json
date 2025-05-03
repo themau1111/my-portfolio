@@ -1,0 +1,36 @@
+{
+  "hero.title": "Mauricio Lozano",
+  "hero.role": "Frontend Developer",
+  "about.title": "About me",
+  "about.description": "I am a frontend developer focused on creating clean, fast and visually impactful experiences.",
+  "projects": {
+    "title": "Projects",
+    "demo": "View demo",
+    "items": [
+      {
+        "title": "Wedding invitation",
+        "description": "Project developed for my wedding. Includes guest management, confirmation via email, calendar integration, and an admin panel."
+      },
+      {
+        "title": "Project 2",
+        "description": "Brief description of project 2. Includes key features and technologies used."
+      },
+      {
+        "title": "Project 3",
+        "description": "Brief description of project 3. Includes key features and technologies used."
+      }
+    ]
+  },
+  "technologies": {
+    "title": "Technologies",
+    "list": {
+      "react": "React",
+      "next": "Next.js",
+      "typescript": "TypeScript",
+      "tailwind": "TailwindCSS",
+      "three": "Three.js",
+      "framer": "Framer Motion"
+    }
+  },
+  "rights": "© 2025 Mauricio Lozano. Todos los derechos reservados."
+}

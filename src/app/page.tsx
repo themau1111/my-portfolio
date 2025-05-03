@@ -1,103 +1,88 @@
-import Image from "next/image";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { motion } from "framer-motion";
+import ScrollStars from "./components/ScrollStars";
+import TechnologiesSection from "./components/TechnologiesSection";
+import ProjectsSection from "./components/ProjectsSection";
+import { useTranslation } from "react-i18next";
+import i18n from "./i18n";
+import { Globe } from "lucide-react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const { t } = useTranslation();
+  const [mounted, setMounted] = useState(false);
+  const [lang, setLang] = useState("es");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+  useEffect(() => {
+    setMounted(true);
+    setLang(i18n.language);
+  }, []);
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "es" ? "en" : "es";
+    i18n.changeLanguage(newLang);
+    setLang(newLang);
+  };
+
+  return (
+    <div className="relative min-h-screen text-white font-sans">
+      <div className="fixed inset-0 z-[-1] pointer-events-none">
+        <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 1] }}>
+          <ScrollStars />
+        </Canvas>
+      </div>
+
+      <main className="relative z-10">
+        {/* Botón flotante de cambio de idioma */}
+        {mounted && (
+          <div className="fixed bottom-4 right-4 z-50">
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 px-3 py-1 rounded bg-cyan-600 text-sm text-white hover:bg-cyan-500 transition"
+            >
+              <Globe className="w-4 h-4" />
+              {lang === "en" ? "English" : "Español"}
+            </button>
+          </div>
+        )}
+
+        <section className="h-screen flex items-center justify-center">
+          <div className="text-center">
+            <motion.h1
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="text-5xl font-bold"
+            >
+              Mauricio Lozano
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="text-xl mt-2"
+            >
+              {t("hero.role")}
+            </motion.p>
+          </div>
+        </section>
+
+        <section className="px-8 py-20 max-w-3xl mx-auto">
+          <h2 className="text-2xl font-semibold mb-4">{t("about.title")}</h2>
+          <p className="text-gray-300 leading-relaxed">
+            {t("about.description")}
+          </p>
+        </section>
+        <TechnologiesSection />
+
+        <ProjectsSection />
+
+        <footer className="text-center text-sm text-gray-500 pb-8">
+          © 2025 Mauricio Lozano. Todos los derechos reservados.
+        </footer>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
