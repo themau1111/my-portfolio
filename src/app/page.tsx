@@ -10,7 +10,7 @@ import TechnologiesSection from "./components/TechnologiesSection";
 import ProjectsSection from "./components/ProjectsSection";
 import { Globe } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 function ClientOnly({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
@@ -22,13 +22,12 @@ export default function Home() {
   const t = useTranslations();
   const locale = useLocale();
   const router = useRouter();
-  const pathname = usePathname();
 
   const toggleLanguage = () => {
-    const newLocale = locale === "es" ? "en" : "es";
-    const segments = pathname.split("/");
-    segments[1] = newLocale;
-    router.push(segments.join("/"));
+    const currentLocale = document.documentElement.lang;
+    const newLocale = currentLocale === "es" ? "en" : "es";
+    document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000`;
+    router.refresh();
   };
 
   return (
