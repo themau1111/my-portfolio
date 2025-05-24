@@ -1,8 +1,12 @@
 {
-  "hero.title": "Mauricio Lozano",
-  "hero.role": "Desarrollador Frontend",
-  "about.title": "Sobre mí",
-  "about.description": "Soy un desarrollador frontend enfocado en crear experiencias limpias, rápidas y visualmente impactantes.",
+  "hero": {
+    "title": "Mauricio Lozano",
+    "role": "Desarrollador Frontend"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "description": "Soy un desarrollador frontend enfocado en crear experiencias limpias, rápidas y visualmente impactantes."
+  },
   "projects": {
     "title": "Proyectos",
     "demo": "Ver demo",

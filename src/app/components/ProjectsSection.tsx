@@ -1,7 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import React from "react";
-import { useTranslation } from "react-i18next";
 import {
   SiReact,
   SiNextdotjs,
@@ -10,7 +10,7 @@ import {
 } from "react-icons/si";
 
 export default function ProjectsSection() {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <section className="px-8 py-20 max-w-6xl mx-auto">

@@ -8,9 +8,9 @@ import { motion } from "framer-motion";
 import ScrollStars from "./components/ScrollStars";
 import TechnologiesSection from "./components/TechnologiesSection";
 import ProjectsSection from "./components/ProjectsSection";
-import { useTranslation } from "react-i18next";
-import i18n from "./i18n";
 import { Globe } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { usePathname, useRouter } from "next/navigation";
 
 function ClientOnly({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
@@ -19,13 +19,16 @@ function ClientOnly({ children }: { children: React.ReactNode }) {
 }
 
 export default function Home() {
-  const { t } = useTranslation();
-  const [lang, setLang] = useState(i18n.language);
+  const t = useTranslations();
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const toggleLanguage = () => {
-    const newLang = i18n.language === "es" ? "en" : "es";
-    i18n.changeLanguage(newLang);
-    setLang(newLang);
+    const newLocale = locale === "es" ? "en" : "es";
+    const segments = pathname.split("/");
+    segments[1] = newLocale;
+    router.push(segments.join("/"));
   };
 
   return (
@@ -46,7 +49,7 @@ export default function Home() {
               className="flex items-center gap-2 px-3 py-1 rounded bg-cyan-600 text-sm text-white hover:bg-cyan-500 transition"
             >
               <Globe className="w-4 h-4" />
-              {lang === "en" ? "English" : "Español"}
+              {locale === "en" ? "English" : "Español"}
             </button>
           </div>
         </ClientOnly>

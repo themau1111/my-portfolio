@@ -1,7 +1,8 @@
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import "./i18n.ts";
+import "./globals.css"; // Asegúrate que el path sea correcto
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,17 +19,21 @@ export const metadata: Metadata = {
   description: "My portfolio",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  const locale = await getLocale();
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <NextIntlClientProvider locale={locale}>
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );

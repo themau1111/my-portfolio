@@ -1,10 +1,10 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import React from "react";
-import { useTranslation } from "react-i18next";
 
 export default function TechnologiesSection() {
-  const { t } = useTranslation();
+  const t = useTranslations();
 
   return (
     <section className="px-8 py-20 max-w-3xl mx-auto">
